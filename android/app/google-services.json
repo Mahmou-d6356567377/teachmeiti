@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "916937890098",
+    "project_id": "teachmeiti",
+    "storage_bucket": "teachmeiti.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:916937890098:android:72ba10d768d8cb0f3cdf2b",
+        "android_client_info": {
+          "package_name": "com.example.teachmeiti"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0a7Qkr7xXPD-YYEDMaay90_hGruBKdV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
