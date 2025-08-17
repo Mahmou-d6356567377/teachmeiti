@@ -9,12 +9,15 @@ class TaskCubit extends Cubit<TaskState> {
   TaskCubit(this.taskBox) : super(TaskInitial());
 
   void loadTasks() {
-    final tasks = taskBox.values.toList();
+    final tasks =
+        taskBox.values
+            .whereType<TaskModel>() // only keep TaskModel entries
+            .toList();
     emit(TaskLoaded(tasks));
   }
 
   void addTask(TaskModel task) {
-    taskBox.add(task);
+    taskBox.add(task); // ✅ this saves as TaskModel
     loadTasks();
   }
 

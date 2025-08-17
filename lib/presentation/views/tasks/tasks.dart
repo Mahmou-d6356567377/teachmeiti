@@ -55,6 +55,7 @@ class Tasks extends StatelessWidget {
                                   index: index,
                                   title: "Task ${index + 1}",
                                   description: task.description,
+                                  color: Color(task.colorValue),
                                 );
                               },
                             );

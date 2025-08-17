@@ -17,7 +17,8 @@ void main() async {
   Hive.registerAdapter(TaskModelAdapter());
 
   await Hive.openBox(ConstText.hivebox1);
-  await Hive.openBox(ConstText.hivebox2);
+  await Hive.deleteBoxFromDisk(ConstText.hivebox2);
+  await Hive.openBox<TaskModel>(ConstText.hivebox2);
 
   // SharedPrefs check
   final prefs = await SharedPreferences.getInstance();
