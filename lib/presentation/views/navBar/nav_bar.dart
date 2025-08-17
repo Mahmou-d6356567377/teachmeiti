@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:teachmeiti/presentation/views/chats/chats_screen.dart';
 import 'package:teachmeiti/presentation/views/home/home.dart';
 import 'package:teachmeiti/presentation/views/profile/profile_screen.dart';
 import 'package:teachmeiti/presentation/views/settings/setting_screen.dart';
@@ -33,8 +32,8 @@ class _NavBarScreenState extends State<NavBarScreen> {
 
     // Now that we have the UID, initialize screens
     _screens = [
-      HomeScreen(),
-      Tasks(),
+      HomeScreen(uid: uid ?? ''),
+      Tasks(uid: uid ?? '',),
       SettingsScreen(),
       if (uid != null) ProfileScreen(uid: uid!) else Container(), // fallback
     ];

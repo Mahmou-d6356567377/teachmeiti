@@ -31,13 +31,13 @@ class _MakeAccountDetailsScreenState extends State<MakeAccountDetailsScreen> {
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true);
 
-      final box = Hive.box(ConstText.hivebox);
+      final box = Hive.box(ConstText.hivebox1);
       await box.put(widget.uid, {
-        'name': _nameController.text.trim(),
-        'studentId': _studentIdController.text.trim(),
-        'maritalStatus': _maritalStatusController.text.trim(),
-        'nationality': _nationalityController.text.trim(),
-        'residence': _residenceController.text.trim(),
+        ConstText.hivesubname : _nameController.text.trim(),
+        ConstText.hivesubstudentId : _studentIdController.text.trim(),
+        ConstText.hivesubmaritalStatus: _maritalStatusController.text.trim(),
+        ConstText.hivesubnationality : _nationalityController.text.trim(),
+        ConstText.hivesubresidence : _residenceController.text.trim(),
       });
 
       setState(() => _isLoading = false);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teachmeiti/presentation/views/home/widgets/chart_card.dart';
 import 'package:teachmeiti/presentation/views/home/widgets/subject_list.dart';
@@ -9,8 +10,8 @@ import 'package:teachmeiti/utils/routes/routes.dart';
 import 'package:teachmeiti/widgets/custom_background.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
+  const HomeScreen({super.key, required this.uid});
+  final String uid;
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -19,23 +20,36 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   String? userUID;
 
- @override
+  @override
   void initState() {
     super.initState();
     _loadUserUID();
   }
 
-
- Future<void> _loadUserUID() async {
+  Future<void> _loadUserUID() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       userUID = prefs.getString(ConstText.sharedprefIDU);
     });
-    print('................User UID: $userUID...................................  HERE IT IS ');
+    print(
+      '................User UID: $userUID...................................  HERE IT IS ',
+    );
   }
-  
+
   @override
   Widget build(BuildContext context) {
+    final userBox = Hive.box(ConstText.hivebox1);
+    final userData = userBox.get(
+      widget.uid,
+      defaultValue: {
+        'name': 'Unknown',
+        'studentId': '',
+        'maritalStatus': '',
+        'nationality': '',
+        'residence': '',
+        'email': 'Unknown',
+      },
+    );
     final hight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
@@ -56,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       SizedBox(height: hight * 0.2),
                       Text(
-                        'Hi, Ciar',
+                        userData['name'] ?? 'Unknown',
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 22,
@@ -72,10 +86,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       const SizedBox(height: 16),
-                  
+
                       chartcard(totaltasks: 30, completedtasks: 20),
                       const SizedBox(height: 16),
-                  
+
                       // Activities Chart Placeholder
                       GestureDetector(
                         onTap: () {
@@ -96,9 +110,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       const SizedBox(height: 16),
-                  
+
                       // Navigation Butt,on Bar
-                     SubjectListWidget(),
+                      SubjectListWidget(),
                     ],
                   ),
                 ),

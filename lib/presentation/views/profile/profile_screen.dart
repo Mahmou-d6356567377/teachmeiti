@@ -15,7 +15,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userBox = Hive.box(ConstText.hivebox);
+    final userBox = Hive.box(ConstText.hivebox1);
     final userData = userBox.get(uid, defaultValue: {
       'name': 'Unknown',
       'studentId': '',

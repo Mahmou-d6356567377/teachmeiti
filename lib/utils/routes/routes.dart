@@ -7,6 +7,7 @@ import 'package:teachmeiti/presentation/views/auth/user_data_screen/user_data_sc
 import 'package:teachmeiti/presentation/views/home/home.dart';
 import 'package:teachmeiti/presentation/views/home/screens/subject_screen.dart';
 import 'package:teachmeiti/presentation/views/navBar/nav_bar.dart';
+import 'package:teachmeiti/presentation/views/tasks/screens/add_task_screen.dart';
 
 class GoRoutes {
   static const String home = '/home';
@@ -17,13 +18,14 @@ class GoRoutes {
   static const String addsubjectscreen = '/addsubjectscreen';
   static const String subjectScreen = '/subjectScreen';
   static const String makeacountdetailscreen = '/makeacountdetailscreen';
+  static const String addtaskscreen = '/addtaskscreen';
 
-  static GoRouter getRouter(bool isLoggedIn) {
+  static GoRouter getRouter(bool isLoggedIn , String uid) {
     return GoRouter(
       initialLocation: isLoggedIn ? navbarscreen : makeaccount,
       debugLogDiagnostics: true,
       routes: [
-        GoRoute(path: home, builder: (context, state) => HomeScreen()),
+        GoRoute(path: home, builder: (context, state) => HomeScreen(uid: uid)),
         GoRoute(path: makeaccount, builder: (context, state) => MakeAccount()),
         GoRoute(
           path: forgetpassword,
@@ -54,6 +56,10 @@ class GoRoutes {
         GoRoute(
           path: makeacountdetailscreen,
           builder: (context, state) => MakeAccountDetailsScreen(uid: state.extra as String),
+        ),
+        GoRoute(
+          path: addtaskscreen,
+          builder: (context, state) => AddTaskScreen(uid: state.extra as String,),
         ),
         
       ],
