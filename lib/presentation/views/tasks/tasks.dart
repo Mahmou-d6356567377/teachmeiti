@@ -9,8 +9,6 @@ import 'package:teachmeiti/utils/consts/const_colors.dart';
 import 'package:teachmeiti/utils/routes/routes.dart';
 import 'package:teachmeiti/widgets/custom_background.dart';
 
-
-
 class Tasks extends StatelessWidget {
   const Tasks({super.key, required this.uid});
   final String uid;
@@ -38,6 +36,8 @@ class Tasks extends StatelessWidget {
                 child: Column(
                   children: [
                     TaskHeader(),
+
+                    /// 👇 Now BlocBuilder auto-updates when Hive changes
                     Expanded(
                       child: BlocBuilder<TaskCubit, TaskState>(
                         builder: (context, state) {
@@ -47,6 +47,7 @@ class Tasks extends StatelessWidget {
                                 child: Text("No tasks yet"),
                               );
                             }
+
                             return ListView.builder(
                               itemCount: state.tasks.length,
                               itemBuilder: (context, index) {
@@ -60,6 +61,7 @@ class Tasks extends StatelessWidget {
                               },
                             );
                           }
+
                           return const Center(
                             child: CircularProgressIndicator(),
                           );
@@ -76,4 +78,3 @@ class Tasks extends StatelessWidget {
     );
   }
 }
-
